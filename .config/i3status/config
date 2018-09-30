@@ -1,0 +1,72 @@
+general {
+        output_format = "i3bar"
+        colors = false
+        markup = pango
+        interval = 5
+        color_good = '#2F343F'
+		color_degraded = '#FD971F'
+		color_bad = '#F92672'
+}
+
+order += "load"
+order += "cpu_temperature 0"
+order += "disk /"
+order += "disk /home"
+#order += "ethernet enp2s0"
+order += "wireless wlp4s0"
+order += "volume master"
+order += "battery 0"
+order += "tztime local"
+
+load {
+        format = "<span background='#FD971F'>   %5min Load </span>"
+}
+
+cpu_temperature 0 {
+        format = "<span background='#F92672'>  %degrees °C </span>"
+        path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+disk "/" {
+        format = "<span background='#FFE792'>  %free Free </span>"
+}
+
+disk "/home" {
+        format = "<span background='#FFE792'> %free Free </span>"
+}
+
+ethernet enp2s0 {
+        format_up = "<span background='#88c0d0'>  %ip </span>"
+        format_down = "<span background='#88c0d0'>  Disconnected </span>"
+}
+
+wireless wlp4s0 {
+        format_up = "<span background='#AE81FF'>  %essid </span>"
+        format_down = "<span background='#AE81FF'>  Disconnected </span>"
+}
+
+volume master {
+        format = "<span background='#CFBE84'>  %volume </span>"
+        format_muted = "<span background='#CFBE84'>  Muted </span>"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+battery 0 {
+        format = "<span background='#A6E22E'>   %percentage </span>"
+        format_down = "No Battery"
+        status_chr = "Charging"
+        status_bat = "Battery"
+        status_unk = "Unknown"
+        status_full = "Charged"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+	last_full_capacity = true
+}
+
+tztime local {
+		format = "<span background='#66D9EF'>  %time </span>"
+		format_time = "%d %b, %H:%M"
+}
+
