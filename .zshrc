@@ -20,7 +20,6 @@ alias orphans="pacman -Qqt"
 alias ls='ls -hN --color=auto --group-directories-first'
 alias progs="(pacman -Qet && pacman -Qm) | sort -u"
 alias config="nano ~/.config/i3/config"
-alias dotgit="yadm push -u origin master"
 
 extract () {
     if [ -f $1 ] ; then
