@@ -145,6 +145,7 @@ bar {
         urgent_workspace	#272822	#ebcb8b	#272822
     }
         status_command i3status
+	position top
 }
 
 # window rules, you can find the window class using xprop
