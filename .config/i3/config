@@ -2,6 +2,10 @@
 set $super Mod4
 set $alt Mod1
 
+#basics
+gaps inner 4
+gaps outer 1
+
 # set font
 font pango: iosevka Semibold, FontAwesome 9
 
@@ -13,6 +17,7 @@ exec --no-startup-id feh --bg-scale ~/Pictures/wallhaven-665335.jpg
 exec_always --no-startup-id numlockx on
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
+exec --no-startup-id dunst
 
 #exec --no-startup-id xfsettingsd &
 exec --no-startup-id compton -b
