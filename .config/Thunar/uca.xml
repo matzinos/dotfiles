@@ -40,7 +40,7 @@
 </action>
 <action>
 	<icon>insert-image</icon>
-	<name>Png 2 Jpg</name>
+	<name>Png -&gt; Jpg</name>
 	<unique-id>1538477531273277-1</unique-id>
 	<command>convert %f -quality 90 %f.jpg</command>
 	<description>Convert png to jpg</description>
@@ -60,7 +60,7 @@
 	<icon>document-print</icon>
 	<name>Print</name>
 	<unique-id>1538479418287804-5</unique-id>
-	<command>lp -o fit-to-page</command>
+	<command>lp -o Samsung_M2070_Series %f</command>
 	<description>Print file</description>
 	<patterns>*</patterns>
 	<image-files/>
