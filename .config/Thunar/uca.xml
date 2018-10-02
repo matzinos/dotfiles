@@ -1,0 +1,83 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>sidebar-places</icon>
+	<name>Open as Root</name>
+	<unique-id>1538478783100952-3</unique-id>
+	<command>gksu thunar %f</command>
+	<description>Open folder as root</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>edit</icon>
+	<name>Edit as Root</name>
+	<unique-id>1538478857379640-4</unique-id>
+	<command>gksu geany %f</command>
+	<description>Edit file as root</description>
+	<patterns>*</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>project-development</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1538143076514212-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>insert-image</icon>
+	<name>Set as Wallpaper</name>
+	<unique-id>1538227556348255-1</unique-id>
+	<command>feh --bg-scale %f</command>
+	<description>Set as Wallpaper</description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>insert-image</icon>
+	<name>Png 2 Jpg</name>
+	<unique-id>1538477531273277-1</unique-id>
+	<command>convert %f -quality 90 %f.jpg</command>
+	<description>Convert png to jpg</description>
+	<patterns>*.png;*.PNG</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>go-jump</icon>
+	<name>Rotate Clockwise</name>
+	<unique-id>1538477657446226-2</unique-id>
+	<command>for file in %F; do tempfile=$(mktemp); (jpegtran -copy all -rotate 90 $file &gt; $tempfile); mv -f $tempfile $file; rm -f $tempfile; done</command>
+	<description>Rotate Clockwise</description>
+	<patterns>*.jpg;*.JPG;*.jpeg;*.JPEG</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>document-print</icon>
+	<name>Print</name>
+	<unique-id>1538479418287804-5</unique-id>
+	<command>lp -o fit-to-page</command>
+	<description>Print file</description>
+	<patterns>*</patterns>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>tools-media-optical-format</icon>
+	<name>MD5sum</name>
+	<unique-id>1538479650171193-6</unique-id>
+	<command>zenity --info --title=&quot;Check MD5 for %n&quot; --text=&quot;$(md5sum %f)&quot;</command>
+	<description>Check MD5sum</description>
+	<patterns>*.iso;*.ISO;*.img;*.IMG</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+</actions>
