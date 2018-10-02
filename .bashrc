@@ -19,23 +19,7 @@ export HISTCONTROL=ignoredups
 shopt -s checkwinsize
 
 # set a fancy prompt (non-color, overwrite the one in /etc/profile)
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[01;33m\]@\[\033[01;35m\]\h:\[\033[37;1m\]\$\[\033[01;34m\]\w/\[\033[00m\]'
 PS1="\[\033[1;34m\]┌─[\[\033[0m\033[1;32m\]\u\[\033[0m\]@\[\033[1;35m\]\h\[\033[0m\033[1;34m\]]-[\[\033[0m\]\#\[\033[1;34m\]]-[\[\033[0m\]\t\[\033[1;34m\]]\n\[\033[1;34m\]└─[\[\033[0m\]\w\[\033[1;34m\]]-[\[\033[0m\033[1;35m\]\$\[\033[0m\033[1;34m\]]>\[\033[0m\]"
-
-# Commented out, don't overwrite xterm -T "title" -n "icontitle" by default.
-# If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-#    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-#    ;;
-#*)
-#    ;;
-#esac
-
-# enable bash completion in interactive shells
-#if [ -f /etc/bash_completion ]; then
-#    . /etc/bash_completion
-#fi
 
 # sudo hint
 if [ ! -e $HOME/.sudo_as_admin_successful ]; then
@@ -137,7 +121,7 @@ echo "============= MEM ============="
 #MiB=`expr $KiB / 1024`
 #note various mem not accounted for, so round to appropriate sizeround=32
 #echo "`expr \( \( $MiB / $round \) + 1 \) \* $round` MiB"
-free -otm;
+free -tm;
 echo "============ NETWORK ============"
 ip link show
 /sbin/ifconfig | awk /'inet addr/ {print $2}'
@@ -153,20 +137,6 @@ echo "=======<pci>========"
 lspci -tv;
 echo "=======<usb>======="
 lsusb;
-}
-
-# go to google for a definition
-define() {
-  local LNG=$(echo $LANG | cut -d '_' -f 1)
-  local CHARSET=$(echo $LANG | cut -d '.' -f 2)
-  lynx -accept_all_cookies -dump -hiddenlinks=ignore -nonumbers -assume_charset="$CHARSET" -display_charset="$CHARSET" "http://www.google.com/search?hl=${LNG}&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -C 2 -A 5 -w "*" > /tmp/deleteme
-  if [ ! -s /tmp/deleteme ]; then
-    echo "Sorry, google doesn't know this one..."
-  else
-    cat /tmp/deleteme | grep -v Search
-    echo ""
-  fi
-  rm -f /tmp/deleteme
 }
 
 function google () {
@@ -189,7 +159,6 @@ alias search="sudo pacman -Ss"
 alias update="sudo pacman -Sy"
 alias upgrade="sudo pacman -Syu"
 alias remove="sudo pacman -R"
-alias orphans="pacman -Qqt"
 alias ls='ls -hN --color=auto --group-directories-first'
 alias progs="(pacman -Qet && pacman -Qm) | sort -u"
 alias config="nano ~/.config/i3/config"
@@ -202,7 +171,7 @@ alias ...='cd ../..'
 #root
 alias root='sudo su'
 #bashrc
-alias bashrc='(nano ~/.bashrc &)'
+alias bashrc='nano ~/.bashrc'
 
 # Define a few Colours
 BLACK='\e[0;30m'
@@ -223,11 +192,31 @@ YELLOW='\e[1;33m'
 WHITE='\e[1;37m'
 NC='\e[0m' # No Color
 
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0222222" #black
+    echo -en "\e]P8222222" #darkgrey
+    echo -en "\e]P1803232" #darkred
+    echo -en "\e]P9982b2b" #red
+    echo -en "\e]P25b762f" #darkgreen
+    echo -en "\e]PA89b83f" #green
+    echo -en "\e]P3aa9943" #brown
+    echo -en "\e]PBefef60" #yellow
+    echo -en "\e]P4324c80" #darkblue
+    echo -en "\e]PC2b4f98" #blue
+    echo -en "\e]P5706c9a" #darkmagenta
+    echo -en "\e]PD826ab1" #magenta
+    echo -en "\e]P692b19e" #darkcyan
+    echo -en "\e]PEa1cdcd" #cyan
+    echo -en "\e]P7ffffff" #lightgrey
+    echo -en "\e]PFdedede" #white
+    clear #for background artifacting
+fi
+
 #------------------------------
 # WELCOME SCREEN
 
 clear
 
-echo -ne "${WHITE}""Άντε πάλι. Τι "${BROWN}"σκατά "${WHITE}"θές;\n"
+echo -ne "${WHITE}""Hello, "${LIGHTGREEN}"Master"${WHITE}". Waiting for your commands...\n"
 echo -ne "\n";
 #------------------------------
